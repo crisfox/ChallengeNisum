@@ -5,6 +5,10 @@ import com.nisum.challenge.R
 import java.net.SocketException
 import java.net.UnknownHostException
 
+/**
+ * Utilidad para envio de mensaje según las Exceptions.
+ */
+
 object NetworkUtils {
 
     const val ERR_DEFAULT_MSG = R.string.err_default_msg

@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 /**
- * Mantiene los datos persistentes en el viewModelScope
+ * Mantiene los datos persistentes en el viewModelScope y envia eventos para que la view pueda tomar desiciones.
  */
 internal class PokeInfoViewModel(
     private val repository: PokeInfoRepository,

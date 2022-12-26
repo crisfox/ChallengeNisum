@@ -7,6 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nisum.challenge.databinding.FragmentDashboardBinding
 
+/**
+ * Pantalla para visualizar el dashboard.
+ *
+ * @property _binding FragmentNotificationsBinding?
+ * @property binding FragmentNotificationsBinding
+ */
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null

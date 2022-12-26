@@ -8,6 +8,9 @@ import com.nisum.challenge.common.models.Evolution
 import com.nisum.challenge.common.models.Species
 import com.nisum.challenge.common.models.TypeResponse
 
+/**
+ * Soporte para mapear la información guardada en database como json.
+ */
 class Converters {
 
     @TypeConverter

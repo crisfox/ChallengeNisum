@@ -7,6 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.nisum.challenge.databinding.FragmentNotificationsBinding
 
+/**
+ * Pantalla para visualizar las notificaciones.
+ *
+ * @property _binding FragmentNotificationsBinding?
+ * @property binding FragmentNotificationsBinding
+ */
 class NotificationsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null

@@ -8,7 +8,9 @@ import com.nisum.challenge.common.models.SpeciesName
 import com.nisum.challenge.databinding.ItemImageBinding
 
 /**
- * Adapter paginado con comparación de datos para optimizar procesos.
+ * Adapter para configurar el recycler correspondiente.
+ *
+ * @property items MutableList<SpeciesName>? lista editable.
  */
 class EvolutionRecyclerViewAdapter(
     var items: MutableList<SpeciesName>? = mutableListOf()

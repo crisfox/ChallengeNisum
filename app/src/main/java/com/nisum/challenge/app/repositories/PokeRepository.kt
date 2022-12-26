@@ -14,9 +14,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 /**
- * Repositorio que trae los proyectos de github.
+ * Repositorio que trae la lista de pokemons.
  *
- * @property pokeApi RepoService para realizar el llamado
+ * @property pokeApi PokeApi para realizar el llamado a la api.
+ * @property pokeDao PokeDao para realizar el llamado a la database del dispositivo.
  * @constructor
  */
 class PokeRepository(

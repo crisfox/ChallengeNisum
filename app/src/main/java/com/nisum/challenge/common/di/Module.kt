@@ -15,7 +15,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 /**
- * Módulo del ViewModel.
+ * Módulo de ViewModels.
  */
 val viewModelModule = module {
     viewModel { PokeViewModel(get()) }
@@ -23,7 +23,7 @@ val viewModelModule = module {
 }
 
 /**
- * Módulo del repositorio.
+ * Módulo de repositorios.
  */
 val repositoryModule = module {
     factory { PokeRepository(get(), db().pokeDao()) }

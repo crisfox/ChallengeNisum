@@ -3,6 +3,17 @@ package com.nisum.challenge.common.networking
 import com.nisum.challenge.common.networking.model.NetworkResult
 import com.nisum.challenge.common.networking.model.State
 
+/**
+ * Estados para el manejo de respuesta de las llamadas http.
+ *
+ * @param T
+ * @property data T?
+ * @property code Int? codigo de error.
+ * @property message String? mensaje adjunto.
+ * @property error String? mensaje de error.
+ * @property exception Exception? si hubo alguna exception.
+ * @property state State Tipos de estado para identificarlo.
+ */
 sealed class AppNetworkResult<T>(
     override val data: T? = null,
     override val code: Int? = null,

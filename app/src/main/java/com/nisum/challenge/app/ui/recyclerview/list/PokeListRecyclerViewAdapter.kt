@@ -8,7 +8,9 @@ import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.ItemListContentBinding
 
 /**
- * Adapter paginado con comparación de datos para optimizar procesos.
+ * Adapter para configurar el recycler correspondiente.
+ *
+ * @property items MutableList<PokeModel>? lista editable.
  */
 class PokeListRecyclerViewAdapter(
     var items: MutableList<PokeModel>? = mutableListOf()

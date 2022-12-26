@@ -7,6 +7,13 @@ import android.net.Network
 import android.net.NetworkRequest
 import androidx.annotation.RequiresPermission
 
+/**
+ * Monitorea la conexion a internet y lo notifica.
+ *
+ * @property application Application contexto para obtener información del dispositivo.
+ * @property networkCallback Callback para evaluar si existe una conexión a internet o no.
+ * @constructor
+ */
 class NetworkMonitor
 @RequiresPermission(android.Manifest.permission.ACCESS_NETWORK_STATE)
 constructor(private val application: Application) {
@@ -42,5 +49,4 @@ constructor(private val application: Application) {
             Variables.isNetworkConnected = false
         }
     }
-
 }

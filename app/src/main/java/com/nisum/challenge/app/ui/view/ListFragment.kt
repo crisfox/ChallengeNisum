@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * Muestra el listado que llega desde el source correspondiente
+ * Muestra el listado que llega desde los eventos que lanza el viewmodel.
  */
 class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
 
@@ -32,7 +32,6 @@ class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
     private lateinit var adapterRecyclerView: PokeListRecyclerViewAdapter
     private var _binding: FragmentItemListBinding? = null
     private val binding get() = _binding!!
-
     private var searchAll = listOf<PokeModel>()
 
     override fun onCreateView(
@@ -52,6 +51,9 @@ class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
         viewModel.fetchPokes()
     }
 
+    /**
+     * Suscripción a los eventos y estados que envia el viewmodel.
+     */
     private fun subscribe() {
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
@@ -67,6 +69,11 @@ class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
         }
     }
 
+    /**
+     * Manejo de eventos de error y desiciones que toma la vista como por ejemplo mostrar el error y el mensaje.
+     *
+     * @param event UIEvent
+     */
     override fun onEvent(event: UIEvent) {
         Log.d(TAG, "event: $event")
         when (event) {
@@ -78,7 +85,7 @@ class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
     }
 
     /**
-     * Configura para que cuando reciba nueva información la envie al adapter y oculte el swipe refresh.
+     * Configura para que cuando reciba nueva información la envie al adapter y oculta otros estados.
      */
     override fun render(state: UIState<List<PokeModel>>) {
         Log.d(TAG, "render: $state")
@@ -110,12 +117,20 @@ class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
         }
     }
 
+    /**
+     * Escucha los cambios de texto que ocasiona el buscador.
+     */
     private fun setupSearch() {
         binding.search.doOnTextChanged { text, _, _, _ ->
             handlePokemonSearchAction(text.toString())
         }
     }
 
+    /**
+     * Filtro y actualización de listados.
+     *
+     * @param text String texto a buscar.
+     */
     private fun handlePokemonSearchAction(text: String) {
         binding.search.clearFocus()
         val searchResultsPokemonList = mutableListOf<PokeModel>()

@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.nisum.challenge.R
+import com.nisum.challenge.app.ui.view.DetailFragment
 import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.ItemListContentBinding
-import com.nisum.challenge.app.ui.view.DetailFragment
 import com.squareup.picasso.Picasso
 
 /**
@@ -16,11 +16,6 @@ import com.squareup.picasso.Picasso
 class PokeViewHolder(private val binding: ItemListContentBinding) : RecyclerView.ViewHolder(
     binding.root
 ) {
-
-    companion object {
-        const val BASE_URL_IMAGE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
-        const val FORMAT_PNG = "png"
-    }
 
     fun bindTo(item: PokeModel?) {
         item?.let {
@@ -44,5 +39,10 @@ class PokeViewHolder(private val binding: ItemListContentBinding) : RecyclerView
                     .navigate(R.id.show_item_detail, bundle)
             }
         }
+    }
+
+    companion object {
+        const val BASE_URL_IMAGE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        const val FORMAT_PNG = "png"
     }
 }

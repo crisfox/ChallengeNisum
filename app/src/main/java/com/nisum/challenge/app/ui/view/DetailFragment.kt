@@ -159,6 +159,9 @@ class DetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
         evolution?.chain?.species?.let { species.add(it) }
         evolution?.chain?.evolvesTo?.map { chain ->
             chain.species?.let { species.add(it) }
+            chain.evolvesTo.map { chainTwo ->
+                chainTwo.species?.let { species.add(it) }
+            }
         }
         evolutionAdapter.updateItems(species)
     }

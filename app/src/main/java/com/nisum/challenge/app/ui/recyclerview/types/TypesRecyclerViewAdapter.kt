@@ -8,7 +8,9 @@ import com.nisum.challenge.common.models.TypeResponse
 import com.nisum.challenge.databinding.ItemChipBinding
 
 /**
- * Adapter paginado con comparación de datos para optimizar procesos.
+ * Adapter para configurar el recycler correspondiente.
+ *
+ * @property items MutableList<TypeResponse>? lista editable.
  */
 class TypesRecyclerViewAdapter(
     var items: MutableList<TypeResponse>? = mutableListOf()

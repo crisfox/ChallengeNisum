@@ -21,22 +21,6 @@ object Client {
         .Builder()
         .readTimeout(TIME_OUT, TimeUnit.SECONDS)
         .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-        .addInterceptor { chain ->
-            val resp = chain.proceed(chain.request())
-            if (resp.code() == 200) {
-                try {
-                    val myJson = resp
-                        .peekBody(2048)
-                        .string()
-                    println(myJson)
-                } catch (e: Exception) {
-                    println("Error parse json from intercept..............")
-                }
-            } else {
-                println(resp)
-            }
-            resp
-        }
         .build()
 
     fun provideRetrofit(factory: Gson, client: OkHttpClient): Retrofit = Retrofit

@@ -8,7 +8,9 @@ import com.nisum.challenge.common.models.BaseStat
 import com.nisum.challenge.databinding.ItemStatBinding
 
 /**
- * Adapter paginado con comparación de datos para optimizar procesos.
+ * Adapter para configurar el recycler correspondiente.
+ *
+ * @property items MutableList<BaseStat>? lista editable.
  */
 class StatRecyclerViewAdapter(
     var items: MutableList<BaseStat>? = mutableListOf()

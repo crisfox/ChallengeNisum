@@ -8,7 +8,9 @@ import com.nisum.challenge.common.models.PalParkEncounter
 import com.nisum.challenge.databinding.ItemChipBinding
 
 /**
- * Adapter paginado con comparación de datos para optimizar procesos.
+ * Adapter para configurar el recycler correspondiente.
+ *
+ * @property items MutableList<PalParkEncounter>? lista editable.
  */
 class PalParkEncounterRecyclerViewAdapter(
     var items: MutableList<PalParkEncounter>? = mutableListOf()

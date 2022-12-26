@@ -5,6 +5,15 @@ import com.google.gson.Gson
 import com.nisum.challenge.common.networking.model.AppServerError
 import retrofit2.Response
 
+/**
+ * Manejo de la respuesta a una llamada a la api.
+ *
+ * @param resources Resources para obtener string del res.
+ * @param serviceCall Function0<Response<T>> bloque de codigo de la llamada.
+ * @param transform Function1<T, E>
+ * @return AppNetworkResult<E>
+ */
+
 inline fun <reified T, reified E> execute(
     resources: Resources,
     serviceCall: () -> Response<T>,
