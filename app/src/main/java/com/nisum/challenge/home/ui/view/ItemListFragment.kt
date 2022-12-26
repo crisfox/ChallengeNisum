@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.nisum.challenge.common.Message
 import com.nisum.challenge.common.UIEvent
 import com.nisum.challenge.common.UIState
+import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.FragmentItemListBinding
 import com.nisum.challenge.home.ui.recyclerview.adapter.list.PokeListRecyclerViewAdapter
@@ -29,6 +31,8 @@ class ItemListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
     private var _binding: FragmentItemListBinding? = null
     private val binding get() = _binding!!
 
+    private var searchAll = listOf<PokeModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +45,7 @@ class ItemListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
         setupButtons()
+        setupSearch()
         subscribe()
         viewModel.fetchPokes()
     }
@@ -76,6 +81,7 @@ class ItemListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
     override fun render(state: UIState<List<PokeModel>>) {
         Log.d(TAG, "render: $state")
         Log.d(TAG, "list: ${state.data}")
+        searchAll = state.data ?: listOf()
         adapterRecyclerView.updateItems(state.data ?: listOf())
         binding.swipeRefresh.isRefreshing = state.loading
         binding.progressBarHome.isVisible = state.loading
@@ -98,6 +104,32 @@ class ItemListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
         binding.retryButtonError.setOnClickListener { viewModel.refresh() }
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.refresh()
+        }
+    }
+
+    private fun setupSearch() {
+        binding.search.doOnTextChanged { text, _, _, _ ->
+            handlePokemonSearchAction(text.toString())
+        }
+    }
+
+    private fun handlePokemonSearchAction(text: String) {
+        binding.search.clearFocus()
+        val searchResultsPokemonList = mutableListOf<PokeModel>()
+        val searchEntry = text
+            .trim()
+            .lowercase()
+        adapterRecyclerView.updateItems(mutableListOf())
+        if (searchEntry.isNotEmpty()) {
+            searchAll.map {
+                if (it.name == searchEntry || it.name.contains(searchEntry) || it.url.getLasPath() == searchEntry) {
+                    searchResultsPokemonList.add(it)
+                }
+            }
+            binding.emptyState.isVisible = searchResultsPokemonList.isEmpty()
+            adapterRecyclerView.updateItems(searchResultsPokemonList)
+        } else {
+            adapterRecyclerView.updateItems(searchAll)
         }
     }
 

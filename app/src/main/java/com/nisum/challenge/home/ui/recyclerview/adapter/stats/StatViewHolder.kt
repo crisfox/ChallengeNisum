@@ -1,9 +1,8 @@
 package com.nisum.challenge.home.ui.recyclerview.adapter.stats
 
 import androidx.recyclerview.widget.RecyclerView
+import com.nisum.challenge.R
 import com.nisum.challenge.common.models.BaseStat
-import com.nisum.challenge.common.models.Type
-import com.nisum.challenge.databinding.ItemChipBinding
 import com.nisum.challenge.databinding.ItemStatBinding
 
 /**
@@ -15,17 +14,21 @@ class StatViewHolder(private val binding: ItemStatBinding) : RecyclerView.ViewHo
 
     fun bindTo(item: BaseStat?) {
         item?.let {
-            binding.name.text = item.stat.name.mapperStat().uppercase()
+            binding.name.text = item.stat.name
+                .mapperStat()
+                .uppercase()
             binding.progress.progress = item.baseStat
         }
     }
-}
 
-fun String.mapperStat() = when(this){
-    "attack" -> "ATK"
-    "defense" -> "DEF"
-    "special-attack" -> "S-ATK"
-    "special-defense" -> "S-DEF"
-    "speed" -> "SPD"
-    else -> this
+    private fun String.mapperStat(): String = with(binding.root.resources) {
+        return when (this@mapperStat) {
+            getString(R.string.attack) -> getString(R.string.atk)
+            getString(R.string.defense) -> getString(R.string.def)
+            getString(R.string.special_attack) -> getString(R.string.s_atk)
+            getString(R.string.special_defense) -> getString(R.string.s_def)
+            getString(R.string.speed) -> getString(R.string.spd)
+            else -> this@mapperStat
+        }
+    }
 }
