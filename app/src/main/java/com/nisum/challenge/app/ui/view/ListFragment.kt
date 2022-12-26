@@ -85,7 +85,7 @@ class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
     }
 
     /**
-     * Configura para que cuando reciba nueva información la envie al adapter y oculta otros estados.
+     * Configura la visibilidad y muestra los datos en la vista.
      */
     override fun render(state: UIState<List<PokeModel>>) {
         Log.d(TAG, "render: $state")

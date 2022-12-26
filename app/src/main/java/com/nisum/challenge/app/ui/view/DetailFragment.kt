@@ -1,11 +1,9 @@
 package com.nisum.challenge.app.ui.view
 
-import android.R
 import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -53,8 +51,7 @@ class DetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
-        val rootView = binding.root
-        return rootView
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,6 +78,9 @@ class DetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
         binding.evolutionRecyclerView.adapter = evolutionAdapter
     }
 
+    /**
+     * Actualiza el contenido que trae de la pantalla anterior.
+     */
     private fun updateContent() {
         item?.let {
             binding.toolbarLayout.title = it.name.replaceFirstChar { char -> char.uppercase() }
@@ -91,6 +91,9 @@ class DetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
         }
     }
 
+    /**
+     * Suscripción a los eventos y estados que envia el viewmodel.
+     */
     private fun subscribe() {
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
@@ -108,32 +111,60 @@ class DetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
         }
     }
 
+    /**
+     * Configura la visibilidad y muestra los datos en la vista.
+     */
     override fun render(state: UIState<PokeInfo>) {
         Log.d(ContentValues.TAG, "render detail: $state")
         Log.d(ContentValues.TAG, "data detail: ${state.data}")
+        updateAdapters(state)
+        visibilitySuccess(state.data != null)
+        binding.progressbar.isVisible = state.loading
+        binding.errorState.isVisible = state.error
+        state.data?.let { updateView(it) }
+    }
+
+    /**
+     * Actualiza los items que necesita cada adapter.
+     *
+     * @param state UIState<PokeInfo>
+     */
+    private fun updateAdapters(state: UIState<PokeInfo>) {
         statAdapter.updateItems(state.data?.stats ?: listOf())
         palParkEncounterAdapter.updateItems(state.data?.species?.palParkEncounters ?: listOf())
         typeAdapter.updateItems(state.data?.types ?: listOf())
         renderEvolution(state.data?.evolution)
-        binding.progressbar.isVisible = state.loading
-        binding.errorState.isVisible = state.error
-        state.data?.let { updateView(it) }
-        hideViewVisibility(!state.error)
     }
 
+    /**
+     * Actualiza algunos valores en la vista
+     *
+     * @param pokeInfo PokeInfo
+     */
     private fun updateView(pokeInfo: PokeInfo) {
         binding.name.text = pokeInfo.name.replaceFirstChar { it.uppercase() }
         binding.weight.text = pokeInfo.getWeightString()
         binding.height.text = pokeInfo.getHeightString()
     }
 
-    private fun hideViewVisibility(isVisible: Boolean) {
-        binding.weightTitle.isVisible = isVisible
+    /**
+     * Configura la visibilidad del caso de exito.
+     *
+     * @param isVisible Boolean
+     */
+    private fun visibilitySuccess(isVisible: Boolean) {
         binding.findMeTitle.isVisible = isVisible
+        binding.weightTitle.isVisible = isVisible
         binding.heightTitle.isVisible = isVisible
         binding.statsTitle.isVisible = isVisible
+        binding.evolutionTitle.isVisible = isVisible
     }
 
+    /**
+     * Manejo de eventos de error y desiciones que toma la vista como por ejemplo mostrar el error y el mensaje.
+     *
+     * @param event UIEvent
+     */
     override fun onEvent(event: UIEvent) {
         Log.d(ContentValues.TAG, "event: $event")
         when (event) {
@@ -141,7 +172,7 @@ class DetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
                 binding.errorState.isVisible = true
                 binding.errorText.text = event.message
                 binding.progressbar.isVisible = false
-                hideViewVisibility(false)
+                visibilitySuccess(false)
             }
         }
     }
@@ -172,6 +203,6 @@ class DetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
     }
 
     companion object {
-        const val ARG_ITEM_PARCELABLE = "item_repo_model_parcelable"
+        const val ARG_ITEM_PARCELABLE = "item_model_parcelable"
     }
 }
