@@ -92,6 +92,7 @@ class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
         Log.d(TAG, "list: ${state.data}")
         searchAll = state.data ?: listOf()
         adapterRecyclerView.updateItems(state.data ?: listOf())
+        adapterRecyclerView.setListSearch(state.data ?: listOf())
         binding.swipeRefresh.isRefreshing = state.loading
         binding.progressBarHome.isVisible = state.loading
         binding.errorState.isVisible = state.error
@@ -122,32 +123,9 @@ class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
      */
     private fun setupSearch() {
         binding.search.doOnTextChanged { text, _, _, _ ->
-            handlePokemonSearchAction(text.toString())
-        }
-    }
-
-    /**
-     * Filtro y actualización de listados.
-     *
-     * @param text String texto a buscar.
-     */
-    private fun handlePokemonSearchAction(text: String) {
-        binding.search.clearFocus()
-        val searchResultsPokemonList = mutableListOf<PokeModel>()
-        val searchEntry = text
-            .trim()
-            .lowercase()
-        adapterRecyclerView.updateItems(mutableListOf())
-        if (searchEntry.isNotEmpty()) {
-            searchAll.map {
-                if (it.name == searchEntry || it.name.contains(searchEntry) || it.url.getLasPath() == searchEntry) {
-                    searchResultsPokemonList.add(it)
-                }
-            }
-            binding.emptyState.isVisible = searchResultsPokemonList.isEmpty()
-            adapterRecyclerView.updateItems(searchResultsPokemonList)
-        } else {
-            adapterRecyclerView.updateItems(searchAll)
+            binding.search.clearFocus()
+            adapterRecyclerView.handlePokemonSearchAction(text.toString())
+            binding.emptyState.isVisible = adapterRecyclerView.items?.isEmpty() ?: false
         }
     }
 

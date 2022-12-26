@@ -13,9 +13,6 @@ interface PokeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(list: List<PokeEntity>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(item: PokeEntity)
-
     @Query("SELECT * FROM PokeEntity")
     fun all(): Flow<List<PokeEntity>>
 

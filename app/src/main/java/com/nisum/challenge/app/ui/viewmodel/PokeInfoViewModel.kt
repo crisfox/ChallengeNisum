@@ -3,6 +3,7 @@ package com.nisum.challenge.app.ui.viewmodel
 import android.content.res.Resources
 import androidx.lifecycle.viewModelScope
 import com.nisum.challenge.R
+import com.nisum.challenge.app.repositories.IPokeInfoRepository
 import com.nisum.challenge.common.Message
 import com.nisum.challenge.common.UIEvent
 import com.nisum.challenge.common.UIState
@@ -12,6 +13,7 @@ import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.common.networking.Loading
 import com.nisum.challenge.common.networking.Success
 import com.nisum.challenge.app.repositories.PokeInfoRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -20,8 +22,9 @@ import kotlinx.coroutines.launch
  * Mantiene los datos persistentes en el viewModelScope y envia eventos para que la view pueda tomar desiciones.
  */
 internal class PokeInfoViewModel(
-    private val repository: PokeInfoRepository,
-    private val resource: Resources
+    private val repository: IPokeInfoRepository,
+    private val resource: Resources,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : BaseViewModel<UIState<PokeInfo>, UIEvent>() {
 
     override val initialState
@@ -36,7 +39,7 @@ internal class PokeInfoViewModel(
     fun fetchInfoPoke(pokeModel: PokeModel?) {
         pokeModel?.let {
             this.pokeModel = it
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch(dispatcher) {
                 repository
                     .getInfo(it.url.getLasPath() ?: "", it.name)
                     .collectLatest { result ->

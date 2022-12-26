@@ -1,6 +1,7 @@
 package com.nisum.challenge.app.ui.viewmodel
 
 import androidx.lifecycle.viewModelScope
+import com.nisum.challenge.app.repositories.IPokeRepository
 import com.nisum.challenge.common.Message
 import com.nisum.challenge.common.UIEvent
 import com.nisum.challenge.common.UIState
@@ -8,6 +9,7 @@ import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.common.networking.Loading
 import com.nisum.challenge.common.networking.Success
 import com.nisum.challenge.app.repositories.PokeRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -16,7 +18,8 @@ import kotlinx.coroutines.launch
  * Mantiene los datos persistentes en el viewModelScope y envia eventos para que la view pueda tomar desiciones.
  */
 internal class PokeViewModel(
-    private val repository: PokeRepository,
+    private val repository: IPokeRepository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : BaseViewModel<UIState<List<PokeModel>>, UIEvent>() {
 
     override val initialState
@@ -27,7 +30,7 @@ internal class PokeViewModel(
     }
 
     fun fetchPokes() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             repository
                 .get()
                 .collectLatest { result ->

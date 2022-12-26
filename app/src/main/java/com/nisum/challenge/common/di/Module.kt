@@ -1,9 +1,12 @@
 package com.nisum.challenge.common.di
 
+import com.nisum.challenge.app.repositories.IPokeInfoRepository
+import com.nisum.challenge.app.repositories.IPokeRepository
 import com.nisum.challenge.common.database.AppDatabase
 import com.nisum.challenge.common.networking.Client
 import com.nisum.challenge.app.repositories.PokeInfoRepository
 import com.nisum.challenge.app.repositories.PokeRepository
+import com.nisum.challenge.app.services.IPokeApi
 import com.nisum.challenge.app.services.PokeApi
 import com.nisum.challenge.app.services.PokeService
 import com.nisum.challenge.app.ui.viewmodel.PokeInfoViewModel
@@ -26,8 +29,8 @@ val viewModelModule = module {
  * Módulo de repositorios.
  */
 val repositoryModule = module {
-    factory { PokeRepository(get(), db().pokeDao()) }
-    factory { PokeInfoRepository(get(), db().pokeInfoDao()) }
+    factory<IPokeRepository> { PokeRepository(get(), db().pokeDao()) }
+    factory<IPokeInfoRepository> { PokeInfoRepository(get(), db().pokeInfoDao()) }
 }
 
 /**
@@ -38,7 +41,7 @@ val apiModule = module {
         return retrofit.create(PokeService::class.java)
     }
     single { provideUseService(get()) }
-    single { PokeApi(get(), androidContext().resources) }
+    single<IPokeApi> { PokeApi(get(), androidContext().resources) }
 }
 
 /**

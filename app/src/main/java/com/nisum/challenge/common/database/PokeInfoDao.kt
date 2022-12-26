@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 interface PokeInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPokeInfo(pokeInfo: PokeInfoEntity)
+    fun insertOne(item: PokeInfoEntity)
 
     @Query("SELECT * FROM PokeInfoEntity WHERE name = :name_")
-    fun getPokeInfo(name_: String): Flow<PokeInfoEntity?>
+    fun get(name_: String): Flow<PokeInfoEntity?>
 }

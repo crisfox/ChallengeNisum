@@ -19,21 +19,21 @@ import retrofit2.http.Query
  * @property service PokeService servicio de la api.
  * @property resources Resources para obtener los string del res.
  */
-class PokeApi(private val service: PokeService, val resources: Resources) {
+class PokeApi(private val service: PokeService, val resources: Resources): IPokeApi {
 
-    suspend fun get(): AppNetworkResult<ResultSearchModel> {
+    override suspend fun get(): AppNetworkResult<ResultSearchModel> {
         return execute(resources) { service.getSearchPokes() }
     }
 
-    suspend fun getInfo(name: String): AppNetworkResult<PokeInfo> {
+    override suspend fun getInfo(name: String): AppNetworkResult<PokeInfo> {
         return execute(resources) { service.getPokeInfo(name) }
     }
 
-    suspend fun getSpeciesInfo(id: String): AppNetworkResult<Species> {
+    override suspend fun getSpeciesInfo(id: String): AppNetworkResult<Species> {
         return execute(resources) { service.getSpeciesInfo(id) }
     }
 
-    suspend fun getEvolutionInfo(id: String): AppNetworkResult<Evolution> {
+    override suspend fun getEvolutionInfo(id: String): AppNetworkResult<Evolution> {
         return execute(resources) { service.getEvolutionInfo(id) }
     }
 }

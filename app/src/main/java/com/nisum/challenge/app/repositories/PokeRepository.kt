@@ -1,5 +1,6 @@
 package com.nisum.challenge.app.repositories
 
+import com.nisum.challenge.app.services.IPokeApi
 import com.nisum.challenge.common.database.PokeDao
 import com.nisum.challenge.common.database.mappers.asDomain
 import com.nisum.challenge.common.database.mappers.asEntity
@@ -8,7 +9,7 @@ import com.nisum.challenge.common.networking.AppNetworkResult
 import com.nisum.challenge.common.networking.Loading
 import com.nisum.challenge.common.networking.Success
 import com.nisum.challenge.common.networking.Variables
-import com.nisum.challenge.app.services.PokeApi
+import com.nisum.challenge.common.database.entity.PokeEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -21,7 +22,7 @@ import kotlinx.coroutines.flow.map
  * @constructor
  */
 class PokeRepository(
-    private val pokeApi: PokeApi,
+    private val pokeApi: IPokeApi,
     private val pokeDao: PokeDao
 ) : IPokeRepository {
 
