@@ -60,7 +60,7 @@ data class Unsuccessful<T>(
     override val data: T? = null,
     override val code: Int,
     override val error: String,
-    override val message: String
+    override val message: String?
 ) : AppNetworkResult<T>(
     data,
     code = code,
@@ -72,7 +72,7 @@ data class Unsuccessful<T>(
 data class NetworkException<T>(
     override val data: T? = null,
     override val exception: Exception,
-    override val message: String
+    override val message: String?
 ) : AppNetworkResult<T>(data, exception = exception, message = message, state = State.ERROR)
 
 data class Loading<T>(override val data: T? = null) :

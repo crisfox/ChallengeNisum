@@ -7,19 +7,21 @@
 
     <fragment
         android:id="@+id/item_list_fragment"
-        android:name="com.nisum.challenge.home.ui.ItemListFragment"
+        android:name="com.nisum.challenge.home.ui.view.ItemListFragment"
         android:label="Home Nisum">
         <action
             android:id="@+id/show_item_detail"
             app:destination="@id/item_detail_fragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/item_list_fragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/item_detail_fragment"
-        android:name="com.nisum.challenge.home.ui.ItemDetailFragment"
+        android:name="com.nisum.challenge.home.ui.view.ItemDetailFragment"
         android:label="Detail"
         tools:layout="@layout/fragment_item_detail">
         <argument

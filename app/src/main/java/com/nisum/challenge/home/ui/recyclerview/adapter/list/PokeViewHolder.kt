@@ -1,13 +1,13 @@
-package com.nisum.challenge.home.ui.recyclerview.viewholder
+package com.nisum.challenge.home.ui.recyclerview.adapter.list
 
 import android.os.Bundle
-import androidx.core.net.toUri
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.nisum.challenge.R
+import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.ItemListContentBinding
-import com.nisum.challenge.home.ui.ItemDetailFragment
+import com.nisum.challenge.home.ui.view.ItemDetailFragment
 import com.squareup.picasso.Picasso
 
 /**
@@ -22,17 +22,17 @@ class PokeViewHolder(private val binding: ItemListContentBinding) : RecyclerView
         const val FORMAT_PNG = "png"
     }
 
-    fun bindTo(pokeModel: PokeModel?) {
-        pokeModel?.let {
-            binding.idText.text = it.name
+    fun bindTo(item: PokeModel?) {
+        item?.let {
+            binding.idText.text = it.name.replaceFirstChar { it.uppercase() }
             Picasso
                 .get()
-                .load("$BASE_URL_IMAGE${it.url?.toUri()?.lastPathSegment}.$FORMAT_PNG")
+                .load("$BASE_URL_IMAGE${item.url.getLasPath()}.$FORMAT_PNG")
                 .into(binding.imageAvatar)
         }
 
         with(itemView) {
-            tag = pokeModel
+            tag = item
             binding.item.setOnClickListener {
                 val itemSelected = tag as PokeModel
                 val bundle = Bundle()

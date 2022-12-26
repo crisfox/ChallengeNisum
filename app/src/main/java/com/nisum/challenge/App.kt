@@ -15,6 +15,7 @@ import org.koin.core.logger.Level
 /**
  * Clase de configuración para los módulos de Koin.
  */
+
 class App : Application() {
     override fun onCreate() {
         super.onCreate()

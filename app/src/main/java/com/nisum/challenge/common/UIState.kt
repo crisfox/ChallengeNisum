@@ -1,10 +1,8 @@
 package com.nisum.challenge.common
 
-import com.nisum.challenge.common.models.PokeModel
-
-data class UIState(
+data class UIState<D>(
     val loading: Boolean = false,
-    val list: List<PokeModel>,
+    val data: D? = null,
     val error: Boolean = false,
     val empty: Boolean = false
 )

@@ -1,4 +1,4 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter
+package com.nisum.challenge.home.ui.recyclerview.adapter.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.ItemListContentBinding
-import com.nisum.challenge.home.ui.recyclerview.viewholder.PokeViewHolder
 
 /**
  * Adapter paginado con comparación de datos para optimizar procesos.
  */
-class PokeListRecyclerViewAdapter(var items: List<PokeModel>? = listOf()) : RecyclerView.Adapter<PokeViewHolder>() {
+class PokeListRecyclerViewAdapter(
+    var items: MutableList<PokeModel>? = mutableListOf()
+) : RecyclerView.Adapter<PokeViewHolder>() {
 
     override fun onBindViewHolder(holder: PokeViewHolder, position: Int) {
         holder.bindTo(items?.get(position))
@@ -24,15 +25,11 @@ class PokeListRecyclerViewAdapter(var items: List<PokeModel>? = listOf()) : Recy
 
     override fun getItemCount() = items?.size ?: 0
 
-    companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<PokeModel>() {
-            override fun areItemsTheSame(oldItem: PokeModel, newItem: PokeModel): Boolean {
-                return oldItem.url == newItem.url
-            }
-
-            override fun areContentsTheSame(oldItem: PokeModel, newItem: PokeModel): Boolean {
-                return oldItem == newItem
-            }
-        }
+    fun updateItems(pokeList: List<PokeModel>) {
+        val diffCallback = PokeDiffCallback(items, pokeList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.items?.removeAll(items ?: listOf())
+        this.items?.addAll(pokeList)
+        diffResult.dispatchUpdatesTo(this)
     }
 }

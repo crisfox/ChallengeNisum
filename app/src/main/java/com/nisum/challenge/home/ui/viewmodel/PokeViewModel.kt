@@ -17,10 +17,10 @@ import kotlinx.coroutines.launch
  */
 internal class PokeViewModel(
     private val repository: PokeRepository,
-) : BaseViewModel<UIState, UIEvent>() {
+) : BaseViewModel<UIState<List<PokeModel>>, UIEvent>() {
 
     override val initialState
-        get() = UIState(true, listOf())
+        get() = UIState<List<PokeModel>>(true, listOf())
 
     private var loading = false
     private var list = listOf<PokeModel>()
@@ -65,7 +65,7 @@ internal class PokeViewModel(
         updateState(
             UIState(
                 loading = loading,
-                list = list,
+                data = list,
                 error = error,
                 empty = empty
             )

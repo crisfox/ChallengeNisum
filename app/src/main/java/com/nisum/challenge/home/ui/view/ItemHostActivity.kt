@@ -1,4 +1,4 @@
-package com.nisum.challenge.home.ui
+package com.nisum.challenge.home.ui.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

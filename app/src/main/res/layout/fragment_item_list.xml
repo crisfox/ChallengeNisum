@@ -58,7 +58,6 @@
 
             </LinearLayout>
 
-
             <ProgressBar
                 android:id="@+id/progress_bar_home"
                 android:layout_width="wrap_content"
@@ -76,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="LinearLayoutManager"
-                tools:context="com.nisum.challenge.home.ui.ItemHostActivity"
+                tools:context="com.nisum.challenge.home.ui.view.ItemHostActivity"
                 tools:listitem="@layout/item_list_content" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

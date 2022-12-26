@@ -1,10 +1,12 @@
 package com.nisum.challenge.common.networking
 
+import android.content.res.Resources
 import com.google.gson.Gson
 import com.nisum.challenge.common.networking.model.AppServerError
 import retrofit2.Response
 
 inline fun <reified T, reified E> execute(
+    resources: Resources,
     serviceCall: () -> Response<T>,
     transform: (T) -> E
 ): AppNetworkResult<E> {
@@ -20,7 +22,7 @@ inline fun <reified T, reified E> execute(
                         .errorBody()
                         ?.string()
                         ?.let { Gson().fromJson(it, AppServerError::class.java) }?.error
-                        ?: NetworkUtils.ERR_DEFAULT_MSG
+                        ?: resources.getString(NetworkUtils.ERR_DEFAULT_MSG)
                 Unsuccessful(
                     error = errorString,
                     code = code,
@@ -29,18 +31,18 @@ inline fun <reified T, reified E> execute(
             } catch (e: Exception) {
                 e.printStackTrace()
                 Unsuccessful(
-                    error = NetworkUtils.getErrorMessage(e),
+                    error = NetworkUtils.getErrorMessage(resources, e),
                     code = code,
-                    message = NetworkUtils.getErrorMessage(e)
+                    message = NetworkUtils.getErrorMessage(resources, e)
                 )
             }
         }
     } catch (e: Exception) {
         e.printStackTrace()
-        NetworkException(message = NetworkUtils.getErrorMessage(e), exception = e)
+        NetworkException(message = NetworkUtils.getErrorMessage(resources, e), exception = e)
     }
 }
 
-inline fun <reified T> execute(serviceCall: () -> Response<T>): AppNetworkResult<T> {
-    return execute(serviceCall) { it }
+inline fun <reified T> execute(resources: Resources, serviceCall: () -> Response<T>): AppNetworkResult<T> {
+    return execute(resources, serviceCall) { it }
 }

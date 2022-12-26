@@ -1,4 +1,4 @@
-package com.nisum.challenge.home.ui
+package com.nisum.challenge.home.ui.view
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -12,8 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import com.nisum.challenge.common.Message
 import com.nisum.challenge.common.UIEvent
 import com.nisum.challenge.common.UIState
+import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.FragmentItemListBinding
-import com.nisum.challenge.home.ui.recyclerview.adapter.PokeListRecyclerViewAdapter
+import com.nisum.challenge.home.ui.recyclerview.adapter.list.PokeListRecyclerViewAdapter
 import com.nisum.challenge.home.ui.viewmodel.PokeViewModel
 import kotlinx.coroutines.flow.consumeAsFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * Muestra el listado que llega desde el source correspondiente
  */
-class ItemListFragment : Fragment() {
+class ItemListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
 
     private val viewModel by viewModel<PokeViewModel>()
     private lateinit var adapterRecyclerView: PokeListRecyclerViewAdapter
@@ -59,7 +60,7 @@ class ItemListFragment : Fragment() {
         }
     }
 
-    private fun onEvent(event: UIEvent) {
+    override fun onEvent(event: UIEvent) {
         Log.d(TAG, "event: $event")
         when (event) {
             is Message -> {
@@ -72,22 +73,21 @@ class ItemListFragment : Fragment() {
     /**
      * Configura para que cuando reciba nueva información la envie al adapter y oculte el swipe refresh.
      */
-    private fun render(state: UIState) {
+    override fun render(state: UIState<List<PokeModel>>) {
         Log.d(TAG, "render: $state")
-        Log.d(TAG, "list: ${state.list}")
-        adapterRecyclerView.items = state.list
+        Log.d(TAG, "list: ${state.data}")
+        adapterRecyclerView.updateItems(state.data ?: listOf())
         binding.swipeRefresh.isRefreshing = state.loading
         binding.progressBarHome.isVisible = state.loading
         binding.errorState.isVisible = state.error
         binding.emptyState.isVisible = state.empty
-        adapterRecyclerView.notifyDataSetChanged()
     }
 
     /**
      * Configura el recycler junto con el adapter.
      */
     private fun setupRecycler() {
-        adapterRecyclerView = PokeListRecyclerViewAdapter(listOf())
+        adapterRecyclerView = PokeListRecyclerViewAdapter()
         binding.itemList.adapter = adapterRecyclerView
     }
 

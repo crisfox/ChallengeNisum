@@ -1,8 +1,8 @@
 package com.nisum.challenge.home.repositories
 
 import com.nisum.challenge.common.database.PokeDao
-import com.nisum.challenge.common.database.toDaoModel
-import com.nisum.challenge.common.database.toDomainModel
+import com.nisum.challenge.common.database.mappers.asDomain
+import com.nisum.challenge.common.database.mappers.asEntity
 import com.nisum.challenge.common.models.ResultSearchModel
 import com.nisum.challenge.common.networking.AppNetworkResult
 import com.nisum.challenge.common.networking.Loading
@@ -11,12 +11,11 @@ import com.nisum.challenge.common.networking.Variables
 import com.nisum.challenge.home.services.PokeApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 
 /**
  * Repositorio que trae los proyectos de github.
  *
- * @property pokeService RepoService para realizar el llamado
+ * @property pokeApi RepoService para realizar el llamado
  * @constructor
  */
 class PokeRepository(
@@ -29,9 +28,7 @@ class PokeRepository(
             fetchPokeList()
         } else {
             val result = pokeDao.all()
-            result.map { list ->
-                Success(ResultSearchModel(items = list.map { it.toDomainModel() }), 200)
-            }
+            flow { Success(ResultSearchModel(items = result.asDomain()), 200) }
         }
     }
 
@@ -40,7 +37,7 @@ class PokeRepository(
         val result = pokeApi.get()
         if (result is Success) {
             pokeDao.deleteAll()
-            pokeDao.insert(result.data.items.map { it.toDaoModel() })
+            pokeDao.insert(result.data.items.asEntity())
         }
         emit(result)
     }
