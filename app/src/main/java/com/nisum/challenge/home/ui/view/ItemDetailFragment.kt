@@ -14,11 +14,15 @@ import com.nisum.challenge.common.Message
 import com.nisum.challenge.common.UIEvent
 import com.nisum.challenge.common.UIState
 import com.nisum.challenge.common.getLasPath
+import com.nisum.challenge.common.models.Evolution
+import com.nisum.challenge.common.models.EvolutionView
 import com.nisum.challenge.common.models.PokeInfo
 import com.nisum.challenge.common.models.PokeModel
+import com.nisum.challenge.common.models.SpeciesName
 import com.nisum.challenge.common.models.getHeightString
 import com.nisum.challenge.common.models.getWeightString
 import com.nisum.challenge.databinding.FragmentItemDetailBinding
+import com.nisum.challenge.home.ui.recyclerview.adapter.evolution.EvolutionRecyclerViewAdapter
 import com.nisum.challenge.home.ui.recyclerview.adapter.list.PokeViewHolder.Companion.BASE_URL_IMAGE
 import com.nisum.challenge.home.ui.recyclerview.adapter.list.PokeViewHolder.Companion.FORMAT_PNG
 import com.nisum.challenge.home.ui.recyclerview.adapter.parks.PalParkEncounterRecyclerViewAdapter
@@ -38,6 +42,7 @@ class ItemDetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
     private val typeAdapter = TypesRecyclerViewAdapter()
     private val statAdapter = StatRecyclerViewAdapter()
     private val palParkEncounterAdapter = PalParkEncounterRecyclerViewAdapter()
+    private val evolutionAdapter = EvolutionRecyclerViewAdapter()
 
     private var item: PokeModel? = null
     private var _binding: FragmentItemDetailBinding? = null
@@ -73,6 +78,7 @@ class ItemDetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
         binding.typesRecyclerView.adapter = typeAdapter
         binding.parksRecyclerView.adapter = palParkEncounterAdapter
         binding.statsRecyclerView.adapter = statAdapter
+        binding.evolutionRecyclerView.adapter = evolutionAdapter
     }
 
     private fun updateContent() {
@@ -95,7 +101,9 @@ class ItemDetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
             viewModel.event
                 .consumeAsFlow()
                 .collect {
-                    it?.let { event -> onEvent(event) }
+                    it?.let { event ->
+                        onEvent(event)
+                    }
                 }
         }
     }
@@ -106,9 +114,11 @@ class ItemDetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
         statAdapter.updateItems(state.data?.stats ?: listOf())
         palParkEncounterAdapter.updateItems(state.data?.species?.palParkEncounters ?: listOf())
         typeAdapter.updateItems(state.data?.types ?: listOf())
+        renderEvolution(state.data?.evolution)
         binding.progressbar.isVisible = state.loading
         binding.errorState.isVisible = state.error
         state.data?.let { updateView(it) }
+        hideViewVisibility(!state.error)
     }
 
     private fun updateView(pokeInfo: PokeInfo) {
@@ -117,12 +127,21 @@ class ItemDetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
         binding.height.text = pokeInfo.getHeightString()
     }
 
+    private fun hideViewVisibility(isVisible: Boolean) {
+        binding.weightTitle.isVisible = isVisible
+        binding.findMeTitle.isVisible = isVisible
+        binding.heightTitle.isVisible = isVisible
+        binding.statsTitle.isVisible = isVisible
+    }
+
     override fun onEvent(event: UIEvent) {
         Log.d(ContentValues.TAG, "event: $event")
         when (event) {
             is Message -> {
                 binding.errorState.isVisible = true
                 binding.errorText.text = event.message
+                binding.progressbar.isVisible = false
+                hideViewVisibility(false)
             }
         }
     }
@@ -132,6 +151,15 @@ class ItemDetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
      */
     private fun setupButtons() {
         binding.retryButtonError.setOnClickListener { viewModel.refresh() }
+    }
+
+    private fun renderEvolution(evolution: Evolution?) {
+        val species = mutableListOf<SpeciesName>()
+        evolution?.chain?.species?.let { species.add(it) }
+        evolution?.chain?.evolvesTo?.map { chain ->
+            chain.species?.let { species.add(it) }
+        }
+        evolutionAdapter.updateItems(species)
     }
 
     override fun onDestroyView() {

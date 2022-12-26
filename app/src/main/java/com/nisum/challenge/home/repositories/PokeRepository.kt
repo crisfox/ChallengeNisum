@@ -7,10 +7,12 @@ import com.nisum.challenge.common.models.ResultSearchModel
 import com.nisum.challenge.common.networking.AppNetworkResult
 import com.nisum.challenge.common.networking.Loading
 import com.nisum.challenge.common.networking.Success
+import com.nisum.challenge.common.networking.Unsuccessful
 import com.nisum.challenge.common.networking.Variables
 import com.nisum.challenge.home.services.PokeApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 /**
  * Repositorio que trae los proyectos de github.
@@ -28,7 +30,9 @@ class PokeRepository(
             fetchPokeList()
         } else {
             val result = pokeDao.all()
-            flow { Success(ResultSearchModel(items = result.asDomain()), 200) }
+            result.map { pokeEntity ->
+                Success(ResultSearchModel(items = pokeEntity.asDomain()), 200)
+            }
         }
     }
 

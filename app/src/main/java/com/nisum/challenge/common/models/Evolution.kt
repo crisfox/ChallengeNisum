@@ -14,7 +14,7 @@ data class Evolution(
 @Parcelize
 data class Chain(
     @field:SerializedName("evolves_to") val evolvesTo: List<Chain>,
-    val species: SpeciesName
+    val species: SpeciesName?
 ) : Parcelable
 
 @Parcelize

@@ -68,7 +68,6 @@ internal class PokeInfoViewModel(
             loading = false
             error = true
             pushEvent(Message(resource.getString(R.string.err_default_msg)))
-            invalidate()
         }
     }
 

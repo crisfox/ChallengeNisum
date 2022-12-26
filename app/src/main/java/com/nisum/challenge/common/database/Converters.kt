@@ -48,10 +48,10 @@ class Converters {
         .toList()
 
     @TypeConverter
-    fun listStatsToJsonString(value: List<BaseStat>?): String = Gson().toJson(value)
+    fun listBaseStatToJsonString(value: List<BaseStat>?): String = Gson().toJson(value)
 
     @TypeConverter
-    fun jsonStringToListStats(value: String) = Gson()
+    fun jsonStringToListBaseStat(value: String) = Gson()
         .fromJson(value, Array<BaseStat>::class.java)
         .toList()
 }

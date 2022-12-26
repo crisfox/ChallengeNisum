@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.nisum.challenge.common.database.entity.PokeEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PokeDao {
@@ -16,7 +17,7 @@ interface PokeDao {
     fun insert(item: PokeEntity)
 
     @Query("SELECT * FROM PokeEntity")
-    fun all(): List<PokeEntity>
+    fun all(): Flow<List<PokeEntity>>
 
     @Query("DELETE FROM PokeEntity")
     fun deleteAll()

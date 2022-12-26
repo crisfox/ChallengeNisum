@@ -5,7 +5,6 @@ import com.nisum.challenge.common.database.mappers.asDomain
 import com.nisum.challenge.common.database.mappers.asEntity
 import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.PokeInfo
-import com.nisum.challenge.common.models.Species
 import com.nisum.challenge.common.networking.AppNetworkResult
 import com.nisum.challenge.common.networking.Loading
 import com.nisum.challenge.common.networking.Success
@@ -13,8 +12,8 @@ import com.nisum.challenge.common.networking.Unsuccessful
 import com.nisum.challenge.common.networking.Variables
 import com.nisum.challenge.home.services.PokeApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 /**
  * Repositorio que trae los proyectos de github.
@@ -32,8 +31,8 @@ class PokeInfoRepository(
             fetchPokeInfo(id, name)
         } else {
             val result = pokeInfoDao.getPokeInfo(name)
-            flow {
-                result?.let {
+            result.map {
+                it?.let {
                     Success(it.asDomain(), 200)
                 } ?: Unsuccessful(code = 400, error = "Error database", message = "Not found poke info.")
             }
@@ -46,7 +45,7 @@ class PokeInfoRepository(
         val resultSpecies = pokeApi.getSpeciesInfo(id)
         val resultEvolution = pokeApi.getEvolutionInfo(resultSpecies.data?.evolutionChain?.url?.getLasPath() ?: "")
 
-        if (result is Success && resultSpecies is Success && resultEvolution is Success){
+        if (result is Success && resultSpecies is Success && resultEvolution is Success) {
             result.data.species = resultSpecies.data
             result.data.evolution = resultEvolution.data
             pokeInfoDao.insertPokeInfo(result.data.asEntity())
