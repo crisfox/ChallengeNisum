@@ -18,9 +18,10 @@
         android:theme="@style/Theme.ChallengeNisum"
         tools:targetApi="31">
         <activity
-            android:name=".home.ui.view.HostActivity"
+            android:name=".app.ui.view.HostActivity"
             android:exported="true"
             android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustPan"
             tools:targetApi="24">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,12 +2,12 @@ package com.nisum.challenge.common.di
 
 import com.nisum.challenge.common.database.AppDatabase
 import com.nisum.challenge.common.networking.Client
-import com.nisum.challenge.home.repositories.PokeInfoRepository
-import com.nisum.challenge.home.repositories.PokeRepository
-import com.nisum.challenge.home.services.PokeApi
-import com.nisum.challenge.home.services.PokeService
-import com.nisum.challenge.home.ui.viewmodel.PokeInfoViewModel
-import com.nisum.challenge.home.ui.viewmodel.PokeViewModel
+import com.nisum.challenge.app.repositories.PokeInfoRepository
+import com.nisum.challenge.app.repositories.PokeRepository
+import com.nisum.challenge.app.services.PokeApi
+import com.nisum.challenge.app.services.PokeService
+import com.nisum.challenge.app.ui.viewmodel.PokeInfoViewModel
+import com.nisum.challenge.app.ui.viewmodel.PokeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.scope.Scope
