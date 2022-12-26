@@ -1,8 +1,7 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.parks
+package com.nisum.challenge.home.ui.recyclerview.parks
 
 import androidx.recyclerview.widget.RecyclerView
 import com.nisum.challenge.common.models.PalParkEncounter
-import com.nisum.challenge.common.models.Type
 import com.nisum.challenge.databinding.ItemChipBinding
 
 /**

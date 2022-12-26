@@ -1,4 +1,4 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.types
+package com.nisum.challenge.home.ui.recyclerview.types
 
 import androidx.recyclerview.widget.RecyclerView
 import com.nisum.challenge.common.models.TypeResponse

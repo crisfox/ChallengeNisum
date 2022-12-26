@@ -1,10 +1,10 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.evolution
+package com.nisum.challenge.home.ui.recyclerview.evolution
 
 import androidx.recyclerview.widget.RecyclerView
 import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.SpeciesName
 import com.nisum.challenge.databinding.ItemImageBinding
-import com.nisum.challenge.home.ui.recyclerview.adapter.list.PokeViewHolder
+import com.nisum.challenge.home.ui.recyclerview.list.PokeViewHolder
 import com.squareup.picasso.Picasso
 
 /**

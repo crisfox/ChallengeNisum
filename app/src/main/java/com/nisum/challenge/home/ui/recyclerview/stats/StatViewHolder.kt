@@ -1,4 +1,4 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.stats
+package com.nisum.challenge.home.ui.recyclerview.stats
 
 import androidx.recyclerview.widget.RecyclerView
 import com.nisum.challenge.R

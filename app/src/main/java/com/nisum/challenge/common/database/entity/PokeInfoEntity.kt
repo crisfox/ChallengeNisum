@@ -19,10 +19,5 @@ data class PokeInfoEntity(
     val evolution: Evolution?,
     val abilities: List<Abilities>,
     val stats: List<BaseStat>,
-    val species: Species?,
-    val hp: Int,
-    val attack: Int,
-    val defense: Int,
-    val speed: Int,
-    val exp: Int
+    val species: Species?
 )

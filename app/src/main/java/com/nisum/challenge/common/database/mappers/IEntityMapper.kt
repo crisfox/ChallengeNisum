@@ -1,6 +1,6 @@
 package com.nisum.challenge.common.database.mappers
 
-interface EntityMapper<Domain, Entity> {
+interface IEntityMapper<Domain, Entity> {
 
     fun asEntity(domain: Domain): Entity
 

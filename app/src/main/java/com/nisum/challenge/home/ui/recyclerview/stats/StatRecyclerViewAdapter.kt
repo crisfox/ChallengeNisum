@@ -1,4 +1,4 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.stats
+package com.nisum.challenge.home.ui.recyclerview.stats
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

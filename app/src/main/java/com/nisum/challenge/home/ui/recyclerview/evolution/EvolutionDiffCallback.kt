@@ -1,7 +1,6 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.evolution
+package com.nisum.challenge.home.ui.recyclerview.evolution
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nisum.challenge.common.models.BaseStat
 import com.nisum.challenge.common.models.SpeciesName
 
 class EvolutionDiffCallback(

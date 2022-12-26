@@ -1,4 +1,4 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.list
+package com.nisum.challenge.home.ui.recyclerview.list
 
 import android.os.Bundle
 import androidx.navigation.findNavController

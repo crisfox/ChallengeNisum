@@ -1,11 +1,11 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.stats
+package com.nisum.challenge.home.ui.recyclerview.types
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nisum.challenge.common.models.BaseStat
+import com.nisum.challenge.common.models.TypeResponse
 
-class StatDiffCallback(
-    private val oldList: List<BaseStat>? = listOf(),
-    private val newList: List<BaseStat>? = listOf(),
+class TypeDiffCallback(
+    private val oldList: List<TypeResponse>? = listOf(),
+    private val newList: List<TypeResponse>? = listOf(),
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize() = oldList?.size ?: 0
@@ -13,7 +13,7 @@ class StatDiffCallback(
     override fun getNewListSize() = newList?.size ?: 0
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-        oldList?.get((oldItemPosition))?.stat?.name == newList?.get((oldItemPosition))?.stat?.name
+        oldList?.get((oldItemPosition))?.type?.name == newList?.get((oldItemPosition))?.type?.name
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
         oldList?.get((oldItemPosition)) == newList?.get((oldItemPosition))

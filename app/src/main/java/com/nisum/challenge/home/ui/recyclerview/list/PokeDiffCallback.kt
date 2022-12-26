@@ -1,4 +1,4 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.list
+package com.nisum.challenge.home.ui.recyclerview.list
 
 import androidx.recyclerview.widget.DiffUtil
 import com.nisum.challenge.common.models.PokeModel

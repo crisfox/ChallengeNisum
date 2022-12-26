@@ -1,4 +1,4 @@
-package com.nisum.challenge.home.ui.recyclerview.adapter.evolution
+package com.nisum.challenge.home.ui.recyclerview.evolution
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

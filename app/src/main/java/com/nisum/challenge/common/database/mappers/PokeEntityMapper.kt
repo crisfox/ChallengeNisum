@@ -3,7 +3,7 @@ package com.nisum.challenge.common.database.mappers
 import com.nisum.challenge.common.database.entity.PokeEntity
 import com.nisum.challenge.common.models.PokeModel
 
-object PokeEntityMapper : EntityMapper<List<PokeModel>, List<PokeEntity>> {
+object PokeIEntityMapper : IEntityMapper<List<PokeModel>, List<PokeEntity>> {
 
     override fun asEntity(domain: List<PokeModel>): List<PokeEntity> {
         return domain.map { pokemon ->
@@ -24,6 +24,6 @@ object PokeEntityMapper : EntityMapper<List<PokeModel>, List<PokeEntity>> {
     }
 }
 
-fun List<PokeModel>.asEntity(): List<PokeEntity> = PokeEntityMapper.asEntity(this)
+fun List<PokeModel>.asEntity(): List<PokeEntity> = PokeIEntityMapper.asEntity(this)
 
-fun List<PokeEntity>.asDomain(): List<PokeModel> = PokeEntityMapper.asDomain(this)
+fun List<PokeEntity>.asDomain(): List<PokeModel> = PokeIEntityMapper.asDomain(this)

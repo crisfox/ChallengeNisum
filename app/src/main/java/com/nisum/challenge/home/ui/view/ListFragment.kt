@@ -18,7 +18,7 @@ import com.nisum.challenge.common.UIState
 import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.FragmentItemListBinding
-import com.nisum.challenge.home.ui.recyclerview.adapter.list.PokeListRecyclerViewAdapter
+import com.nisum.challenge.home.ui.recyclerview.list.PokeListRecyclerViewAdapter
 import com.nisum.challenge.home.ui.viewmodel.PokeViewModel
 import kotlinx.coroutines.flow.consumeAsFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
