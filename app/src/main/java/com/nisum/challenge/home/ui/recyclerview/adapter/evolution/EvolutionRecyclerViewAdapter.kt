@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.nisum.challenge.common.models.BaseStat
-import com.nisum.challenge.common.models.Evolution
 import com.nisum.challenge.common.models.SpeciesName
 import com.nisum.challenge.databinding.ItemImageBinding
-import com.nisum.challenge.databinding.ItemStatBinding
 
 /**
  * Adapter paginado con comparación de datos para optimizar procesos.

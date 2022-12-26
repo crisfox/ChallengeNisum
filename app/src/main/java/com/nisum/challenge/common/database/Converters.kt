@@ -5,7 +5,6 @@ import com.google.gson.Gson
 import com.nisum.challenge.common.models.Abilities
 import com.nisum.challenge.common.models.BaseStat
 import com.nisum.challenge.common.models.Evolution
-import com.nisum.challenge.common.models.PalParkEncounter
 import com.nisum.challenge.common.models.Species
 import com.nisum.challenge.common.models.TypeResponse
 
@@ -17,14 +16,6 @@ class Converters {
     @TypeConverter
     fun jsonStringToList(value: String) = Gson()
         .fromJson(value, Array<TypeResponse>::class.java)
-        .toList()
-
-    @TypeConverter
-    fun listPalParkEncounterToJsonString(value: List<PalParkEncounter>?): String = Gson().toJson(value)
-
-    @TypeConverter
-    fun jsonStringToListPalParkEncounter(value: String) = Gson()
-        .fromJson(value, Array<PalParkEncounter>::class.java)
         .toList()
 
     @TypeConverter

@@ -22,11 +22,6 @@ internal class PokeViewModel(
     override val initialState
         get() = UIState<List<PokeModel>>(true, listOf())
 
-    private var loading = false
-    private var list = listOf<PokeModel>()
-    private var error = false
-    private var empty = false
-
     fun refresh() {
         fetchPokes()
     }
@@ -38,34 +33,38 @@ internal class PokeViewModel(
                 .collectLatest { result ->
                     when (result) {
                         is Success -> {
-                            loading = false
-                            error = false
-                            empty = result.data.items.isEmpty()
-                            list = result.data.items
+                            update(
+                                empty = result.data.items.isEmpty(),
+                                info = result.data.items
+                            )
                         }
                         is Loading -> {
-                            loading = true
-                            error = false
-                            empty = false
-                            list = result.data?.items ?: listOf()
+                            update(
+                                loading = true,
+                                info = result.data?.items ?: listOf()
+                            )
                         }
                         else -> {
-                            loading = false
-                            error = true
-                            empty = false
+                            update(
+                                error = true
+                            )
                             pushEvent(Message(result.message))
                         }
                     }
-                    invalidate()
                 }
         }
     }
 
-    private fun invalidate() {
+    private fun update(
+        loading: Boolean = false,
+        info: List<PokeModel>? = null,
+        error: Boolean = false,
+        empty: Boolean = false
+    ) {
         updateState(
             UIState(
                 loading = loading,
-                data = list,
+                data = info,
                 error = error,
                 empty = empty
             )

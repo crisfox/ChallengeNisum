@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +14,6 @@ import com.nisum.challenge.common.UIEvent
 import com.nisum.challenge.common.UIState
 import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.Evolution
-import com.nisum.challenge.common.models.EvolutionView
 import com.nisum.challenge.common.models.PokeInfo
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.common.models.SpeciesName

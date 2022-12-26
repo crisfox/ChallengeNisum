@@ -1,7 +1,6 @@
 package com.nisum.challenge.home.ui.viewmodel
 
 import android.content.res.Resources
-import androidx.core.net.toUri
 import androidx.lifecycle.viewModelScope
 import com.nisum.challenge.R
 import com.nisum.challenge.common.Message
@@ -28,9 +27,6 @@ internal class PokeInfoViewModel(
     override val initialState
         get() = UIState<PokeInfo>(loading = true)
 
-    private var loading = false
-    private var info: PokeInfo? = null
-    private var error = false
     private var pokeModel: PokeModel? = null
 
     fun refresh() {
@@ -46,32 +42,28 @@ internal class PokeInfoViewModel(
                     .collectLatest { result ->
                         when (result) {
                             is Success -> {
-                                loading = false
-                                error = false
-                                info = result.data
+                                update(info = result.data)
                             }
                             is Loading -> {
-                                loading = true
-                                error = false
-                                info = result.data
+                                update(
+                                    loading = true,
+                                    info = result.data
+                                )
                             }
                             else -> {
-                                loading = false
-                                error = true
+                                update(error = true)
                                 pushEvent(Message(result.message))
                             }
                         }
-                        invalidate()
                     }
             }
         } ?: run {
-            loading = false
-            error = true
+            update(error = true)
             pushEvent(Message(resource.getString(R.string.err_default_msg)))
         }
     }
 
-    private fun invalidate() {
+    private fun update(loading: Boolean = false, info: PokeInfo? = null, error: Boolean = false) {
         updateState(
             UIState(
                 loading = loading,
