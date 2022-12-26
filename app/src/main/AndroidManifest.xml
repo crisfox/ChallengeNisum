@@ -18,7 +18,7 @@
         android:theme="@style/Theme.ChallengeNisum"
         tools:targetApi="31">
         <activity
-            android:name=".home.ui.view.ItemHostActivity"
+            android:name=".home.ui.view.HostActivity"
             android:exported="true"
             android:resizeableActivity="true"
             tools:targetApi="24">

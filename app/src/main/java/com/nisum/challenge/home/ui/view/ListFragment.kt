@@ -10,6 +10,8 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import com.nisum.challenge.R
 import com.nisum.challenge.common.Message
 import com.nisum.challenge.common.UIEvent
 import com.nisum.challenge.common.UIState
@@ -24,7 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * Muestra el listado que llega desde el source correspondiente
  */
-class ItemListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
+class ListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
 
     private val viewModel by viewModel<PokeViewModel>()
     private lateinit var adapterRecyclerView: PokeListRecyclerViewAdapter
@@ -94,6 +96,7 @@ class ItemListFragment : Fragment(), IView<UIState<List<PokeModel>>, UIEvent> {
      */
     private fun setupRecycler() {
         adapterRecyclerView = PokeListRecyclerViewAdapter()
+        binding.itemList.layoutManager = GridLayoutManager(context, resources.getInteger(R.integer.grid_column_count))
         binding.itemList.adapter = adapterRecyclerView
     }
 

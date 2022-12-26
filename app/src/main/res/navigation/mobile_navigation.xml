@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation android:id="@+id/nav_graph"
+<navigation android:id="@+id/mobile_navigation"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/item_list_fragment">
+    app:startDestination="@id/navigation_home">
 
     <fragment
-        android:id="@+id/item_list_fragment"
-        android:name="com.nisum.challenge.home.ui.view.ItemListFragment"
-        android:label="Home Nisum">
+        android:id="@+id/navigation_home"
+        android:name="com.nisum.challenge.home.ui.view.ListFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_item_list">
         <action
             android:id="@+id/show_item_detail"
             app:destination="@id/item_detail_fragment"
@@ -16,16 +17,28 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/item_list_fragment"
+            app:popUpTo="@id/navigation_home"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/item_detail_fragment"
-        android:name="com.nisum.challenge.home.ui.view.ItemDetailFragment"
+        android:name="com.nisum.challenge.home.ui.view.DetailFragment"
         android:label="Detail"
         tools:layout="@layout/fragment_item_detail">
         <argument
             android:name="item_id"
             app:argType="com.nisum.challenge.common.models.PokeModel[]" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.nisum.challenge.home.ui.view.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.nisum.challenge.home.ui.view.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>

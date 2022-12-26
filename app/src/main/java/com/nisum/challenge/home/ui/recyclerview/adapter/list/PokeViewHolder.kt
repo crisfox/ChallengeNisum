@@ -7,7 +7,7 @@ import com.nisum.challenge.R
 import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.ItemListContentBinding
-import com.nisum.challenge.home.ui.view.ItemDetailFragment
+import com.nisum.challenge.home.ui.view.DetailFragment
 import com.squareup.picasso.Picasso
 
 /**
@@ -37,7 +37,7 @@ class PokeViewHolder(private val binding: ItemListContentBinding) : RecyclerView
                 val itemSelected = tag as PokeModel
                 val bundle = Bundle()
                 bundle.putParcelable(
-                    ItemDetailFragment.ARG_ITEM_PARCELABLE,
+                    DetailFragment.ARG_ITEM_PARCELABLE,
                     itemSelected
                 )
                 findNavController()

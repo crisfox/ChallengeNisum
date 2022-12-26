@@ -34,7 +34,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * Representa el detalle del item seleccionado, obtiene la información a través de los argumentos.
  */
-class ItemDetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
+class DetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
 
     private val viewModel by viewModel<PokeInfoViewModel>()
     private val typeAdapter = TypesRecyclerViewAdapter()
