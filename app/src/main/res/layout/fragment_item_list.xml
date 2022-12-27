@@ -90,17 +90,18 @@
                     android:imeOptions="actionSearch"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="12dp"
+                    android:drawablePadding="12dp"
                     android:inputType="textNoSuggestions"
-                    android:textColor="@color/black"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     android:textSize="16sp" />
             </androidx.cardview.widget.CardView>
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/item_list"
                 android:name="com.nisum.challenge.ItemListFragment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="24dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/card_search"

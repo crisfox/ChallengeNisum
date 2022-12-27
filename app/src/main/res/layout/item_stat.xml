@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:gravity="center"
-        tools:text="@string/hp"
-        android:textColor="@color/black"
+        tools:text="@string/atk"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textStyle="bold"/>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
