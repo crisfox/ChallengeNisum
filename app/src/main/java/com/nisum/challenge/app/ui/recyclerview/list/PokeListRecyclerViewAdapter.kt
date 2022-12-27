@@ -32,6 +32,7 @@ class PokeListRecyclerViewAdapter(
     override fun getItemCount() = items?.size ?: 0
 
     fun setListSearch(pokeList: List<PokeModel>) {
+        this.itemsSearch = mutableListOf()
         this.itemsSearch.addAll(pokeList)
     }
 
