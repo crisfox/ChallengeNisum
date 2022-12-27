@@ -1,14 +1,15 @@
 package com.nisum.challenge.app.ui.recyclerview.list
 
 import android.os.Bundle
+import androidx.core.net.toUri
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.nisum.challenge.R
 import com.nisum.challenge.app.ui.view.DetailFragment
 import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.ItemListContentBinding
-import com.squareup.picasso.Picasso
 
 /**
  * Se encarga de mostrar los datos necesarios para la vista.
@@ -20,10 +21,10 @@ class PokeViewHolder(private val binding: ItemListContentBinding) : RecyclerView
     fun bindTo(item: PokeModel?) {
         item?.let {
             binding.idText.text = it.name.replaceFirstChar { it.uppercase() }
-            Picasso
-                .get()
-                .load("$BASE_URL_IMAGE${item.url.getLasPath()}.$FORMAT_PNG")
-                .into(binding.imageAvatar)
+            GlideToVectorYou
+                .init()
+                .with(binding.root.context)
+                .load("$BASE_URL_IMAGE_SVG${it.url.getLasPath()}.$FORMAT_SVG".toUri(), binding.imageAvatar)
         }
 
         with(itemView) {
@@ -43,6 +44,8 @@ class PokeViewHolder(private val binding: ItemListContentBinding) : RecyclerView
 
     companion object {
         const val BASE_URL_IMAGE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        const val BASE_URL_IMAGE_SVG = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/"
         const val FORMAT_PNG = "png"
+        const val FORMAT_SVG = "svg"
     }
 }

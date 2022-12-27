@@ -6,12 +6,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.nisum.challenge.app.ui.recyclerview.evolution.EvolutionRecyclerViewAdapter
 import com.nisum.challenge.app.ui.recyclerview.list.PokeViewHolder.Companion.BASE_URL_IMAGE
+import com.nisum.challenge.app.ui.recyclerview.list.PokeViewHolder.Companion.BASE_URL_IMAGE_SVG
 import com.nisum.challenge.app.ui.recyclerview.list.PokeViewHolder.Companion.FORMAT_PNG
+import com.nisum.challenge.app.ui.recyclerview.list.PokeViewHolder.Companion.FORMAT_SVG
 import com.nisum.challenge.app.ui.recyclerview.parks.PalParkEncounterRecyclerViewAdapter
 import com.nisum.challenge.app.ui.recyclerview.stats.StatRecyclerViewAdapter
 import com.nisum.challenge.app.ui.recyclerview.types.TypesRecyclerViewAdapter
@@ -27,7 +31,6 @@ import com.nisum.challenge.common.models.SpeciesName
 import com.nisum.challenge.common.models.getHeightString
 import com.nisum.challenge.common.models.getWeightString
 import com.nisum.challenge.databinding.FragmentItemDetailBinding
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.consumeAsFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -84,10 +87,11 @@ class DetailFragment : Fragment(), IView<UIState<PokeInfo>, UIEvent> {
     private fun updateContent() {
         item?.let {
             binding.toolbarLayout.title = it.name.replaceFirstChar { char -> char.uppercase() }
-            Picasso
-                .get()
-                .load("${BASE_URL_IMAGE}${it.url.getLasPath()}.${FORMAT_PNG}")
-                .into(binding.imageBackground)
+            GlideToVectorYou.justLoadImage(
+                activity,
+                "$BASE_URL_IMAGE_SVG${it.url.getLasPath()}.$FORMAT_SVG".toUri(),
+                binding.imageBackground
+            )
         }
     }
 
