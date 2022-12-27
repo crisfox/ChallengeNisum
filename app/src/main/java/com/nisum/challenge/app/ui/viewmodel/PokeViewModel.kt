@@ -8,7 +8,6 @@ import com.nisum.challenge.common.UIState
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.common.networking.Loading
 import com.nisum.challenge.common.networking.Success
-import com.nisum.challenge.app.repositories.PokeRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest

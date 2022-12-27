@@ -2,7 +2,6 @@ package com.nisum.challenge.app.ui.recyclerview.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nisum.challenge.common.getLasPath

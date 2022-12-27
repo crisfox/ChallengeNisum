@@ -15,7 +15,6 @@ import com.nisum.challenge.R
 import com.nisum.challenge.common.Message
 import com.nisum.challenge.common.UIEvent
 import com.nisum.challenge.common.UIState
-import com.nisum.challenge.common.getLasPath
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.databinding.FragmentItemListBinding
 import com.nisum.challenge.app.ui.recyclerview.list.PokeListRecyclerViewAdapter

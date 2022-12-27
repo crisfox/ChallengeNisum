@@ -12,7 +12,6 @@ import com.nisum.challenge.common.models.PokeInfo
 import com.nisum.challenge.common.models.PokeModel
 import com.nisum.challenge.common.networking.Loading
 import com.nisum.challenge.common.networking.Success
-import com.nisum.challenge.app.repositories.PokeInfoRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest

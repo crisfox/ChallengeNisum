@@ -9,7 +9,6 @@ import com.nisum.challenge.common.networking.AppNetworkResult
 import com.nisum.challenge.common.networking.Loading
 import com.nisum.challenge.common.networking.Success
 import com.nisum.challenge.common.networking.Variables
-import com.nisum.challenge.common.database.entity.PokeEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
