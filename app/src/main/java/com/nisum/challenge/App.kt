@@ -1,12 +1,12 @@
 package com.nisum.challenge
 
 import android.app.Application
-import com.nisum.challenge.common.di.apiModule
-import com.nisum.challenge.common.di.daoModule
-import com.nisum.challenge.common.di.repositoryModule
-import com.nisum.challenge.common.di.retrofitModule
-import com.nisum.challenge.common.di.viewModelModule
-import com.nisum.challenge.common.networking.NetworkMonitor
+import com.nisum.challenge.di.apiModule
+import com.nisum.challenge.di.daoModule
+import com.nisum.challenge.di.repositoryModule
+import com.nisum.challenge.di.retrofitModule
+import com.nisum.challenge.di.viewModelModule
+import com.nisum.challenge.core.NetworkMonitor
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin

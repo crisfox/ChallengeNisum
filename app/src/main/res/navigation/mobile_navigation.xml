@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.nisum.challenge.app.ui.view.ListFragment"
+        android:name="com.nisum.challenge.ui.view.ListFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_item_list">
         <action
@@ -22,23 +22,23 @@
     </fragment>
     <fragment
         android:id="@+id/item_detail_fragment"
-        android:name="com.nisum.challenge.app.ui.view.DetailFragment"
+        android:name="com.nisum.challenge.ui.view.DetailFragment"
         android:label="Detail"
         tools:layout="@layout/fragment_item_detail">
         <argument
             android:name="item_id"
-            app:argType="com.nisum.challenge.common.models.PokeModel[]" />
+            app:argType="com.nisum.challenge.data.model.PokeModel[]" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.nisum.challenge.app.ui.view.DashboardFragment"
+        android:name="com.nisum.challenge.ui.view.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.nisum.challenge.app.ui.view.NotificationsFragment"
+        android:name="com.nisum.challenge.ui.view.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
