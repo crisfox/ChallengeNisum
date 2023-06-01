@@ -7,6 +7,7 @@ import com.nisum.challenge.di.repositoryModule
 import com.nisum.challenge.di.retrofitModule
 import com.nisum.challenge.di.viewModelModule
 import com.nisum.challenge.core.NetworkMonitor
+import com.nisum.challenge.di.useCaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -30,6 +31,7 @@ class App : Application() {
                     apiModule,
                     repositoryModule,
                     viewModelModule,
+                    useCaseModule
                 )
             )
         }

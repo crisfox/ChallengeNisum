@@ -1,7 +1,7 @@
 package com.nisum.challenge.ui.recyclerview.types
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nisum.challenge.data.model.TypeResponse
+import com.nisum.challenge.domain.model.TypeResponse
 
 class TypeDiffCallback(
     private val oldList: List<TypeResponse>? = listOf(),

@@ -5,7 +5,7 @@ import com.nisum.challenge.data.network.PokeService
 import com.nisum.challenge.data.database.PokeInfoDao
 import com.nisum.challenge.data.database.mappers.asDomain
 import com.nisum.challenge.data.database.mappers.asEntity
-import com.nisum.challenge.data.model.PokeInfo
+import com.nisum.challenge.domain.model.PokeInfo
 import com.nisum.challenge.data.network.model.AppNetworkResult
 import com.nisum.challenge.data.network.model.Loading
 import com.nisum.challenge.data.network.model.Success

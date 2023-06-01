@@ -1,4 +1,4 @@
-package com.nisum.challenge.data.model
+package com.nisum.challenge.domain.model
 
 import com.nisum.challenge.data.database.entity.PokeInfoEntity
 

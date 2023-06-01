@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_item_detail">
         <argument
             android:name="item_id"
-            app:argType="com.nisum.challenge.data.model.PokeModel[]" />
+            app:argType="com.nisum.challenge.domain.model.PokeModel[]" />
     </fragment>
 
     <fragment

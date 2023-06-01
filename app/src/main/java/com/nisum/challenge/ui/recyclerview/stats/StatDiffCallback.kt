@@ -1,7 +1,7 @@
 package com.nisum.challenge.ui.recyclerview.stats
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nisum.challenge.data.model.BaseStat
+import com.nisum.challenge.domain.model.BaseStat
 
 class StatDiffCallback(
     private val oldList: List<BaseStat>? = listOf(),

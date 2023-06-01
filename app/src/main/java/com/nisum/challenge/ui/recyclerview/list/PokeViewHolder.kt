@@ -6,7 +6,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.nisum.challenge.R
-import com.nisum.challenge.data.model.PokeModel
+import com.nisum.challenge.domain.model.PokeModel
 import com.nisum.challenge.databinding.ItemListContentBinding
 import com.nisum.challenge.ui.view.DetailFragment
 import com.nisum.challenge.ui.view.common.getLastPath

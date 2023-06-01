@@ -1,7 +1,7 @@
 package com.nisum.challenge.ui.recyclerview.parks
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nisum.challenge.data.model.PalParkEncounter
+import com.nisum.challenge.domain.model.PalParkEncounter
 
 class PalParkEncounterDiffCallback(
     private val oldList: List<PalParkEncounter>? = listOf(),

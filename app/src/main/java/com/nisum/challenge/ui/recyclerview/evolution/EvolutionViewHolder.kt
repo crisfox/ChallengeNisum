@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.nisum.challenge.ui.recyclerview.list.PokeViewHolder
 import com.nisum.challenge.ui.view.common.getLastPath
-import com.nisum.challenge.data.model.SpeciesName
+import com.nisum.challenge.domain.model.SpeciesName
 import com.nisum.challenge.databinding.ItemImageBinding
 
 /**

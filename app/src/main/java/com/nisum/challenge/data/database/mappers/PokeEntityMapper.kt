@@ -1,7 +1,7 @@
 package com.nisum.challenge.data.database.mappers
 
 import com.nisum.challenge.data.database.entity.PokeEntity
-import com.nisum.challenge.data.model.PokeModel
+import com.nisum.challenge.domain.model.PokeModel
 
 object PokeIEntityMapper : IEntityMapper<List<PokeModel>, List<PokeEntity>> {
 

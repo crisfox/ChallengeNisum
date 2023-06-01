@@ -1,16 +1,17 @@
 package com.nisum.challenge.ui.viewmodel
 
-import com.nisum.challenge.data.repositories.PokeInfoRepository
 import com.nisum.challenge.ui.view.common.Message
 import com.nisum.challenge.ui.view.common.UIState
 import com.nisum.challenge.data.database.mappers.asDomain
-import com.nisum.challenge.data.model.PokeInfo
-import com.nisum.challenge.data.model.PokeModel
+import com.nisum.challenge.domain.model.PokeInfo
+import com.nisum.challenge.domain.model.PokeModel
 import com.nisum.challenge.data.network.model.AppNetworkResult
 import com.nisum.challenge.data.network.model.Loading
 import com.nisum.challenge.data.network.model.Success
 import com.nisum.challenge.data.network.model.Unsuccessful
-import com.nisum.challenge.data.model.mockPokeInfoEntity
+import com.nisum.challenge.data.repositories.PokeInfoRepository
+import com.nisum.challenge.domain.GetInfoPokeUseCase
+import com.nisum.challenge.domain.model.mockPokeInfoEntity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.consumeAsFlow
@@ -38,6 +39,8 @@ import kotlin.test.assertEquals
 @RunWith(RobolectricTestRunner::class)
 class PokeInfoViewModelTest : KoinTest {
 
+    private lateinit var getInfoPokeUseCase: GetInfoPokeUseCase
+
     @Mock
     lateinit var repository: PokeInfoRepository
 
@@ -47,23 +50,24 @@ class PokeInfoViewModelTest : KoinTest {
     @BeforeTest
     fun setUp() {
         MockitoAnnotations.openMocks(this)
+        getInfoPokeUseCase = GetInfoPokeUseCase(repository)
         stopKoin()
         startKoin {
             modules(
                 module {
-                    single { PokeInfoViewModel(repository, mock(), UnconfinedTestDispatcher()) }
+                    single { PokeInfoViewModel(getInfoPokeUseCase, mock(), UnconfinedTestDispatcher()) }
                 }
             )
         }
     }
 
     @Test
-    fun `fetch repository success should state loading and success`() = runTest {
+    fun `fetch get info use case success should state loading and success`() = runTest {
         // Given
         val dataChannel = Channel<AppNetworkResult<PokeInfo>>(1)
         val data = mockPokeInfoEntity().asDomain()
 
-        `when`(repository.getInfo(anyString(), anyString())).thenReturn(dataChannel.consumeAsFlow())
+        `when`(getInfoPokeUseCase.invoke(anyString(), anyString())).thenReturn(dataChannel.consumeAsFlow())
         dataChannel.trySend(Loading(data))
         // When
         val viewModel = get<PokeInfoViewModel>()
@@ -86,10 +90,10 @@ class PokeInfoViewModelTest : KoinTest {
     }
 
     @Test
-    fun `fetch repository get error should send a EventUI`() = runTest {
+    fun `fetch get info use case get error should send a EventUI`() = runTest {
         // Given
         val dataChannel = Channel<AppNetworkResult<PokeInfo>>(1)
-        `when`(repository.getInfo(anyString(), anyString())).thenReturn(dataChannel.consumeAsFlow())
+        `when`(getInfoPokeUseCase.invoke(anyString(), anyString())).thenReturn(dataChannel.consumeAsFlow())
         dataChannel.trySend(Unsuccessful(null, 400, "error", "errorMessage"))
         // When
         val viewModel = get<PokeInfoViewModel>()

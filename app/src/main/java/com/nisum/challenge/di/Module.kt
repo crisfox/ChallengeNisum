@@ -1,14 +1,16 @@
 package com.nisum.challenge.di
 
-import com.nisum.challenge.data.repositories.PokeInfoRepository
-import com.nisum.challenge.data.repositories.PokeRepository
-import com.nisum.challenge.data.database.AppDatabase
 import com.nisum.challenge.core.Client
-import com.nisum.challenge.data.repositories.PokeInfoRepositoryImpl
-import com.nisum.challenge.data.repositories.PokeRepositoryImpl
+import com.nisum.challenge.data.database.AppDatabase
+import com.nisum.challenge.data.network.PokeApi
 import com.nisum.challenge.data.network.PokeService
 import com.nisum.challenge.data.network.PokeServiceImpl
-import com.nisum.challenge.data.network.PokeApi
+import com.nisum.challenge.data.repositories.PokeInfoRepository
+import com.nisum.challenge.data.repositories.PokeInfoRepositoryImpl
+import com.nisum.challenge.data.repositories.PokeRepository
+import com.nisum.challenge.data.repositories.PokeRepositoryImpl
+import com.nisum.challenge.domain.GetInfoPokeUseCase
+import com.nisum.challenge.domain.GetListPokeUseCase
 import com.nisum.challenge.ui.viewmodel.PokeInfoViewModel
 import com.nisum.challenge.ui.viewmodel.PokeViewModel
 import org.koin.android.ext.koin.androidContext
@@ -23,6 +25,14 @@ import retrofit2.Retrofit
 val viewModelModule = module {
     viewModel { PokeViewModel(get()) }
     viewModel { PokeInfoViewModel(get(), androidContext().resources) }
+}
+
+/**
+ * Módulo de UsesCases.
+ */
+val useCaseModule = module {
+    factory { GetListPokeUseCase(get()) }
+    factory { GetInfoPokeUseCase(get()) }
 }
 
 /**

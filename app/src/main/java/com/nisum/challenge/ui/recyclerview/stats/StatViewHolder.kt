@@ -2,7 +2,7 @@ package com.nisum.challenge.ui.recyclerview.stats
 
 import androidx.recyclerview.widget.RecyclerView
 import com.nisum.challenge.R
-import com.nisum.challenge.data.model.BaseStat
+import com.nisum.challenge.domain.model.BaseStat
 import com.nisum.challenge.databinding.ItemStatBinding
 
 /**

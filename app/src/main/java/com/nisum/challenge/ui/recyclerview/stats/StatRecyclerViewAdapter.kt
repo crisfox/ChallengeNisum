@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.nisum.challenge.data.model.BaseStat
+import com.nisum.challenge.domain.model.BaseStat
 import com.nisum.challenge.databinding.ItemStatBinding
 
 /**

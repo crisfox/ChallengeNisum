@@ -2,10 +2,10 @@ package com.nisum.challenge.data.network
 
 import android.content.res.Resources
 import com.nisum.challenge.core.execute
-import com.nisum.challenge.data.model.Evolution
-import com.nisum.challenge.data.model.PokeInfo
-import com.nisum.challenge.data.model.ResultSearchModel
-import com.nisum.challenge.data.model.Species
+import com.nisum.challenge.domain.model.Evolution
+import com.nisum.challenge.domain.model.PokeInfo
+import com.nisum.challenge.domain.model.ResultSearchModel
+import com.nisum.challenge.domain.model.Species
 import com.nisum.challenge.data.network.model.AppNetworkResult
 
 /**

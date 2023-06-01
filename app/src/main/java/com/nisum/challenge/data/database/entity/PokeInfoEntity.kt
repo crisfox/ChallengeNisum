@@ -2,11 +2,11 @@ package com.nisum.challenge.data.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.nisum.challenge.data.model.Abilities
-import com.nisum.challenge.data.model.BaseStat
-import com.nisum.challenge.data.model.Evolution
-import com.nisum.challenge.data.model.Species
-import com.nisum.challenge.data.model.TypeResponse
+import com.nisum.challenge.domain.model.Abilities
+import com.nisum.challenge.domain.model.BaseStat
+import com.nisum.challenge.domain.model.Evolution
+import com.nisum.challenge.domain.model.Species
+import com.nisum.challenge.domain.model.TypeResponse
 
 @Entity
 data class PokeInfoEntity(

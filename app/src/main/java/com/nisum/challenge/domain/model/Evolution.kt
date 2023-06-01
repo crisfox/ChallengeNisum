@@ -1,4 +1,4 @@
-package com.nisum.challenge.data.model
+package com.nisum.challenge.domain.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

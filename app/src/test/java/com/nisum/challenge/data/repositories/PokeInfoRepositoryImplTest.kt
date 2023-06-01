@@ -10,9 +10,9 @@ import com.nisum.challenge.data.network.model.NetworkException
 import com.nisum.challenge.data.network.model.Success
 import com.nisum.challenge.data.network.model.Unsuccessful
 import com.nisum.challenge.data.network.Variables
-import com.nisum.challenge.data.model.mockEvolution
-import com.nisum.challenge.data.model.mockPokeInfoEntity
-import com.nisum.challenge.data.model.mockSpecies
+import com.nisum.challenge.domain.model.mockEvolution
+import com.nisum.challenge.domain.model.mockPokeInfoEntity
+import com.nisum.challenge.domain.model.mockSpecies
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.take

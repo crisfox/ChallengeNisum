@@ -1,7 +1,7 @@
 package com.nisum.challenge.ui.recyclerview.evolution
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nisum.challenge.data.model.SpeciesName
+import com.nisum.challenge.domain.model.SpeciesName
 
 class EvolutionDiffCallback(
     private val oldList: List<SpeciesName>? = listOf(),

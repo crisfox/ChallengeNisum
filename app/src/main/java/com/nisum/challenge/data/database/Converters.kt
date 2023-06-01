@@ -2,11 +2,11 @@ package com.nisum.challenge.data.database
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import com.nisum.challenge.data.model.Abilities
-import com.nisum.challenge.data.model.BaseStat
-import com.nisum.challenge.data.model.Evolution
-import com.nisum.challenge.data.model.Species
-import com.nisum.challenge.data.model.TypeResponse
+import com.nisum.challenge.domain.model.Abilities
+import com.nisum.challenge.domain.model.BaseStat
+import com.nisum.challenge.domain.model.Evolution
+import com.nisum.challenge.domain.model.Species
+import com.nisum.challenge.domain.model.TypeResponse
 
 /**
  * Soporte para mapear la información guardada en database como json.

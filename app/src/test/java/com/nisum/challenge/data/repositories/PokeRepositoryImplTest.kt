@@ -6,8 +6,8 @@ import com.nisum.challenge.data.database.PokeDao
 import com.nisum.challenge.data.database.entity.PokeEntity
 import com.nisum.challenge.data.database.mappers.asDomain
 import com.nisum.challenge.data.database.mappers.asEntity
-import com.nisum.challenge.data.model.PokeModel
-import com.nisum.challenge.data.model.ResultSearchModel
+import com.nisum.challenge.domain.model.PokeModel
+import com.nisum.challenge.domain.model.ResultSearchModel
 import com.nisum.challenge.data.network.model.Loading
 import com.nisum.challenge.data.network.model.Success
 import com.nisum.challenge.data.network.Variables

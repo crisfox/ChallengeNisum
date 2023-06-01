@@ -3,15 +3,15 @@ package com.nisum.challenge.ui.viewmodel
 import android.content.res.Resources
 import androidx.lifecycle.viewModelScope
 import com.nisum.challenge.R
-import com.nisum.challenge.data.repositories.PokeInfoRepository
+import com.nisum.challenge.domain.model.PokeInfo
+import com.nisum.challenge.domain.model.PokeModel
+import com.nisum.challenge.data.network.model.Loading
+import com.nisum.challenge.data.network.model.Success
+import com.nisum.challenge.domain.GetInfoPokeUseCase
 import com.nisum.challenge.ui.view.common.Message
 import com.nisum.challenge.ui.view.common.UIEvent
 import com.nisum.challenge.ui.view.common.UIState
 import com.nisum.challenge.ui.view.common.getLastPath
-import com.nisum.challenge.data.model.PokeInfo
-import com.nisum.challenge.data.model.PokeModel
-import com.nisum.challenge.data.network.model.Loading
-import com.nisum.challenge.data.network.model.Success
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
  * Mantiene los datos persistentes en el viewModelScope y envia eventos para que la view pueda tomar desiciones.
  */
 internal class PokeInfoViewModel(
-    private val repository: PokeInfoRepository,
+    private val getInfoPokeUseCase: GetInfoPokeUseCase,
     private val resource: Resources,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : BaseViewModel<UIState<PokeInfo>, UIEvent>() {
@@ -39,8 +39,8 @@ internal class PokeInfoViewModel(
         pokeModel?.let {
             this.pokeModel = it
             viewModelScope.launch(dispatcher) {
-                repository
-                    .getInfo(it.url.getLastPath() ?: "", it.name)
+                getInfoPokeUseCase
+                    .invoke(it.url.getLastPath() ?: "", it.name)
                     .collectLatest { result ->
                         when (result) {
                             is Success -> {

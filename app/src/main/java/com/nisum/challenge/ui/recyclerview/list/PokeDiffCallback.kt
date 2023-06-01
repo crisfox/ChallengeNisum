@@ -1,7 +1,7 @@
 package com.nisum.challenge.ui.recyclerview.list
 
 import androidx.recyclerview.widget.DiffUtil
-import com.nisum.challenge.data.model.PokeModel
+import com.nisum.challenge.domain.model.PokeModel
 
 class PokeDiffCallback(
     private val oldPokeList: List<PokeModel>? = listOf(),
